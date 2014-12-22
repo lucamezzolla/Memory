@@ -3,26 +3,20 @@ package com.lucamezzolla.memory;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
-import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
+
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author Luca
  */
-public final class GridHard extends javax.swing.JPanel {
+public final class GridHard extends Grid {
     
-    private final Properties prop;
-    private final Properties propTimer;
     int f1, f2, f3, f4, f5, f6, f7, f8, f9, f10,
             f11, f12, f13, f14, f15, f16, f17, f18, f19, f20,
             f21, f22, f23, f24, f25;
-    private Timer timer;
-    private GridInterface listener;
-    private int timerInt;
-    private final int diffChoice;
 
     /**
      * Creates new form GridEasy
@@ -48,7 +42,7 @@ public final class GridHard extends javax.swing.JPanel {
         startTimerWait();
     }
     
-    void setFields() {
+    protected void setFields() {
         f1 = randInt(1, 9); f2 = randInt(1, 9);
         f3 = randInt(1, 9); f4 = randInt(1, 9);
         f5 = randInt(1, 9); f6 = randInt(1, 9);
@@ -93,7 +87,7 @@ public final class GridHard extends javax.swing.JPanel {
         this.listener = listener;
     }
     
-    void startTimerWait() {
+    protected void startTimerWait() {
         timerInt = 1;
         switch(diffChoice) {
             case 1: { timerInt = Integer.valueOf(propTimer.getProperty("easyWait")); break; }
@@ -151,12 +145,6 @@ public final class GridHard extends javax.swing.JPanel {
         }, 0, 1000);
     }
     
-    final int randInt(int min, int max) {
-        Random rand = new Random();
-        int randomNum = rand.nextInt((max - min) + 1) + min;
-        return randomNum;
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -164,7 +152,7 @@ public final class GridHard extends javax.swing.JPanel {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    protected void initComponents() {
 
         field2 = new javax.swing.JTextField();
         field3 = new javax.swing.JTextField();
@@ -456,22 +444,6 @@ public final class GridHard extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_okButActionPerformed
 
-    private void newButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newButActionPerformed
-        okBut.setEnabled(false);
-        timer.cancel();
-        timer.purge();
-        setFields();
-        startTimerWait();
-    }//GEN-LAST:event_newButActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if(listener != null) {
-            timer.cancel();
-            timer.purge();
-            listener.stopActivity();
-        }
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void field2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_field2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_field2ActionPerformed
@@ -503,9 +475,5 @@ public final class GridHard extends javax.swing.JPanel {
     private javax.swing.JTextField field7;
     private javax.swing.JTextField field8;
     private javax.swing.JTextField field9;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton newBut;
-    private javax.swing.JButton okBut;
-    private javax.swing.JLabel timerLabel;
     // End of variables declaration//GEN-END:variables
 }

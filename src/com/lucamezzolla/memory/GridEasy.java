@@ -1,26 +1,19 @@
 package com.lucamezzolla.memory;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
-import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
+
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author Luca
  */
-public final class GridEasy extends javax.swing.JPanel {
-    
-    private final Properties prop;
-    private final Properties propTimer;
-    int f1, f2, f3, f4;
-    private Timer timer;
-    private GridInterface listener;
-    private int diffChoice = 1;
-    private int timerInt;
+public final class GridEasy extends Grid {
+
+	int f1, f2, f3, f4;    
     
     /**
      * Creates new form GridEasy
@@ -29,24 +22,10 @@ public final class GridEasy extends javax.swing.JPanel {
      * @throws java.io.IOException
      */
     public GridEasy(Properties prop, int diffChoice) throws IOException {
-        initComponents();
-        this.prop = prop;
-        this.diffChoice = diffChoice;
-        propTimer = new Properties();
-        try {
-            propTimer.load(new FileInputStream("timer.properties"));
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        }
-        okBut.setEnabled(false);
-        okBut.setText(prop.getProperty("check"));
-        newBut.setText(prop.getProperty("restart"));
-        jButton1.setText(prop.getProperty("back"));
-        setFields();
-        startTimerWait();
+        setup(prop, diffChoice);
     }
-    
-    void setFields() {
+
+    protected void setFields() {
         f1 = randInt(1, 9);
         f2 = randInt(1, 9);
         f3 = randInt(1, 9);
@@ -61,7 +40,7 @@ public final class GridEasy extends javax.swing.JPanel {
         this.listener = listener;
     }
     
-    void startTimerWait() {
+    protected void startTimerWait() {
         timerInt = 1;
         switch(diffChoice) {
             case 1: { timerInt = Integer.valueOf(propTimer.getProperty("easyWait")); break; }
@@ -110,12 +89,6 @@ public final class GridEasy extends javax.swing.JPanel {
         }, 0, 1000);
     }
     
-    final int randInt(int min, int max) {
-        Random rand = new Random();
-        int randomNum = rand.nextInt((max - min) + 1) + min;
-        return randomNum;
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -123,7 +96,7 @@ public final class GridEasy extends javax.swing.JPanel {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    protected void initComponents() {
 
         field2 = new javax.swing.JTextField();
         field3 = new javax.swing.JTextField();
@@ -236,31 +209,11 @@ public final class GridEasy extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_okButActionPerformed
 
-    private void newButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newButActionPerformed
-        okBut.setEnabled(false);
-        timer.cancel();
-        timer.purge();
-        setFields();
-        startTimerWait();
-    }//GEN-LAST:event_newButActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if(listener != null) {
-            timer.cancel();
-            timer.purge();
-            listener.stopActivity();
-        }
-    }//GEN-LAST:event_jButton1ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField field1;
     private javax.swing.JTextField field2;
     private javax.swing.JTextField field3;
     private javax.swing.JTextField field4;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton newBut;
-    private javax.swing.JButton okBut;
-    private javax.swing.JLabel timerLabel;
     // End of variables declaration//GEN-END:variables
 }
