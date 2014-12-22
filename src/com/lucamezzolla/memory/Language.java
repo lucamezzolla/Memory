@@ -1,4 +1,4 @@
-package memory;
+package com.lucamezzolla.memory;
 
 public enum Language {
 

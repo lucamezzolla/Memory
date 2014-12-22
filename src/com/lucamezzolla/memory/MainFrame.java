@@ -1,4 +1,4 @@
-package memory;
+package com.lucamezzolla.memory;
 
 import java.awt.FlowLayout;
 import java.awt.Toolkit;
@@ -33,7 +33,7 @@ public class MainFrame extends javax.swing.JFrame implements LangInterface, Diff
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("mind.png")));
         setMenuLabel(prop);
         setLayout(new FlowLayout(FlowLayout.CENTER));
-        pic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/memory/mind.png")));
+        pic.setIcon(new javax.swing.ImageIcon(getClass().getResource("mind.png")));
         setSize(pic.getIcon().getIconWidth(), pic.getIcon().getIconHeight() + 80);
         getContentPane().add(pic);
     }

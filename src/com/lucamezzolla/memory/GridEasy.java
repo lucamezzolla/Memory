@@ -1,4 +1,4 @@
-package memory;
+package com.lucamezzolla.memory;
 
 import java.io.FileInputStream;
 import java.io.IOException;

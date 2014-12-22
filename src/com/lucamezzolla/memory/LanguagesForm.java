@@ -3,46 +3,28 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package memory;
+package com.lucamezzolla.memory;
 
 import java.awt.Toolkit;
-import java.util.Properties;
 
 /**
  *
  * @author Luca
  */
-public class DiffForm extends javax.swing.JFrame {
-    
-    private final Properties prop;
-    private DiffInterface listener;
-    private int choice = 1;
+public class LanguagesForm extends javax.swing.JFrame {
+	
+    private LangInterface listener;
+
+    public void setListener(LangInterface listener) {
+        this.listener = listener;
+    }
 
     /**
-     * Creates new form DiffForm
-     * @param impProp
-     * @param choiceImp
+     * Creates new form LanguagesForm
      */
-    public DiffForm(Properties impProp, int choiceImp) {
+    public LanguagesForm() {
         initComponents();
-        prop = impProp;
-        choice = choiceImp;
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("mind.png")));
-        combo.addItem(prop.getProperty("easy"));
-        combo.addItem(prop.getProperty("medium"));
-        combo.addItem(prop.getProperty("hard"));
-        switch(choice) {
-            case 1:
-                combo.setSelectedItem(prop.getProperty("easy"));
-                break;
-            case 2:
-                combo.setSelectedItem(prop.getProperty("medium"));
-                break;
-            case 3:
-                combo.setSelectedItem(prop.getProperty("hard"));
-                break;
-                
-        }
     }
 
     /**
@@ -54,13 +36,15 @@ public class DiffForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        combo = new javax.swing.JComboBox();
+        jComboBox1 = new javax.swing.JComboBox();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Languages");
         setResizable(false);
 
-        combo.setFont(new java.awt.Font("Verdana", 0, 11)); // NOI18N
+        jComboBox1.setFont(new java.awt.Font("Verdana", 0, 11)); // NOI18N
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { Language.EN.toString(), Language.IT.toString(), Language.PT.toString() }));
 
         jButton1.setText("OK");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -76,15 +60,15 @@ public class DiffForm extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(combo, 0, 260, Short.MAX_VALUE))
+                    .addComponent(jComboBox1, 0, 260, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(combo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -94,22 +78,15 @@ public class DiffForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String lang = (String) jComboBox1.getSelectedItem();
         if(listener != null) {
-            int n = 1;
-            if(combo.getSelectedItem().equals(prop.getProperty("easy"))) n = 1;
-            if(combo.getSelectedItem().equals(prop.getProperty("medium"))) n = 2;
-            if(combo.getSelectedItem().equals(prop.getProperty("hard"))) n = 3;
-            listener.changeDiff(n);
+            listener.changeLang(lang);
         }
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    public void setListener(DiffInterface listener) {
-        this.listener = listener;
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox combo;
     private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox jComboBox1;
     // End of variables declaration//GEN-END:variables
 }
