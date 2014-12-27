@@ -54,7 +54,7 @@ public class InfoForm extends javax.swing.JFrame {
         jLabel2.setText("Memory");
 
         jLabel3.setFont(new java.awt.Font("Verdana", 0, 11)); // NOI18N
-        jLabel3.setText("Ver. 0.1");
+        jLabel3.setText("Ver. 1.0.0");
 
         author.setFont(new java.awt.Font("Verdana", 0, 11)); // NOI18N
         author.setText("Author: Luca Mezzolla");
